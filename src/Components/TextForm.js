@@ -1,10 +1,33 @@
 import React from "react";
 
-export default function TextForm() {
+export default function TextForm(props) {
+  const [text, setText] = React.useState("Enter your text here");
+  // useState is a hook that allows you to add state to functional components
+  // text is the current state default value , setText is the function to update the state
+
+  //text=uihaih // wrong way to change state, this will not work as expected
+  //setText("uihaih"); // this is the correct way to change state
+
+
+  const handleOnChange = (event) => {
+    // console.log("Text changed"); // This will log every time the text changes
+    // console.log(event.target.value); // This will log the current value of the textarea
+    setText(event.target.value);
+  };
+
+  
+  const handleUpperCase = () => {
+    // console.log("Convert to Uppercase clicked");
+    let newText = text.toUpperCase();
+    // console.log(newText); 
+    setText(newText);
+  };
+
+
   return (
     <>
       <div className="container text-center mb-4">
-        <h1 style={{ marginTop: "60px" }}>Welcome to Text Utility App</h1>
+        <h1 style={{ marginTop: "60px" }}>{props.heading}</h1>
         <div
           className="lead mb-4 info-box"
           style={{
@@ -43,10 +66,11 @@ export default function TextForm() {
             placeholder="Write something here"
             id="plainTextarea"
             style={{ height: "100px" }}
+            value={text} onChange={handleOnChange}
           ></textarea>
         </div>
         <div className="mb-3 w-50 mx-auto d-flex flex-wrap justify-content-center gap-2">
-          <button type="button" className="btn btn-primary">
+          <button type="button" className="btn btn-primary" onClick={handleUpperCase} >
             Convert to Uppercase
           </button>
           <button type="button" className="btn btn-secondary">

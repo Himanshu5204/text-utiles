@@ -5,7 +5,7 @@ import TextForm from "./Components/TextForm";
 function App() {
   return (
     <>
-      <TextForm />
+      <TextForm heading="Welcome to Text Utility App"/>
     </>
   );
 }

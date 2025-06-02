@@ -2,6 +2,7 @@
 import "./App.css";
 // import About_us from "./Components/About_us";
 import Navbar from "./Components/Navbar";
+import Alert from "./Components/Alert";
 import TextForm from "./Components/TextForm";
 import React, { useState } from "react";
 
@@ -22,7 +23,7 @@ function App() {
   const toggleMode = () => {
     if (mode === "light") {
       setMode("dark");
-      document.body.style.backgroundColor = "#042743";
+      document.body.style.backgroundColor = "rgb(125 172 210)";
       showAlert("Dark mode has been enabled", "success");
     } else {
       setMode("light");
@@ -34,7 +35,8 @@ function App() {
   return (
     <>
       <Navbar title="Text Utility App" mode={mode} toggleMode={toggleMode} />
-      <TextForm heading="Welcome to Text Utility App" mode={mode} />
+      <Alert alert={alert} />
+      <TextForm heading="Welcome to Text Utility App" mode={mode} showAlert={showAlert} />
 
       {/* <About_us /> */}
     </>

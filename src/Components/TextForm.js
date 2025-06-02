@@ -1,11 +1,9 @@
 import React from "react";
-import {useState} from "react";
+import { useState } from "react";
 
 export default function TextForm(props) {
   const [findWord, setFindWord] = useState("");
   const [replaceWord, setReplaceWord] = useState("");
-
-
 
   const [text, setText] = React.useState("Enter your text here");
   // useState is a hook that allows you to add state to functional components
@@ -28,6 +26,7 @@ export default function TextForm(props) {
     let newText = text.toUpperCase();
     // console.log(newText);
     setText(newText);
+    props.showAlert("Converted to uppercase!", "success");
   };
 
   const handleLowerCase = () => {
@@ -35,17 +34,20 @@ export default function TextForm(props) {
     let newText = text.toLowerCase();
     // console.log(newText);
     setText(newText);
+    props.showAlert("Converted to lowercase!", "success");
   };
 
   const handleClearText = () => {
     // console.log("Clear Text clicked");
     setText("");
+    props.showAlert("Text cleared!", "success");
   };
 
   const handleCopyText = () => {
     // console.log("Copy Text clicked");
     navigator.clipboard.writeText(text);
-    alert("Text copied to clipboard");
+    //alert("Text copied to clipboard");
+    props.showAlert("Text copied to clipboard!", "success");
   };
 
   // navigator.clipboard.writeText is used to copy text to clipboard
@@ -55,22 +57,39 @@ export default function TextForm(props) {
     // console.log("Remove Extra Spaces clicked");
     let newText = text.split(/[ ]+/).join(" ");
     setText(newText);
+    props.showAlert("Extra spaces removed!", "success");
   };
 
   // Handler Functions
   const handleCapitalizeWords = () => {
     let newText = text.replace(/\b\w/g, (char) => char.toUpperCase());
     setText(newText);
+    props.showAlert("Words capitalized!", "success");
   };
 
   const handleReverseText = () => {
     let newText = text.split("").reverse().join("");
     setText(newText);
+    props.showAlert("Text reversed!", "success");
   };
 
   const handleFindAndReplace = () => {
+    if (!findWord) {
+      props.showAlert("Find word cannot be empty", "warning");
+      return;
+    }
+
+    if (!text.includes(findWord)) {
+      props.showAlert(`"${findWord}" not found in text`, "danger");
+      return;
+    }
+
     let newText = text.replaceAll(findWord, replaceWord);
     setText(newText);
+    props.showAlert(
+      `Replaced all "${findWord}" with "${replaceWord}"`,
+      "success"
+    );
   };
 
   const convertTextToNumber = () => {
@@ -88,22 +107,32 @@ export default function TextForm(props) {
       ten: 10,
     };
 
-    let newText = text
-      .split(" ")
-      .map((word) =>
-        numberWords[word.toLowerCase()] !== undefined
-          ? numberWords[word.toLowerCase()]
-          : word
-      )
+    let words = text.split(" ");
+    let found = false;
+
+    let newText = words
+      .map((word) => {
+        const lower = word.toLowerCase();
+        if (numberWords[lower] !== undefined) {
+          found = true;
+          return numberWords[lower];
+        }
+        return word;
+      })
       .join(" ");
-    setText(newText);
+
+    if (!found) {
+      props.showAlert("No number words (zero-ten) found to convert", "warning");
+    } else {
+      setText(newText);
+      props.showAlert("Converted number words to digits", "success");
+    }
   };
 
   return (
     <>
       <div className="container text-center mb-4">
         <h1 style={{ marginTop: "30px" }}>{props.heading}</h1>
-        
       </div>
       <div className="container text-center mb-4">
         <p className="lead mb-4">

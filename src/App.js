@@ -25,10 +25,18 @@ function App() {
       setMode("dark");
       document.body.style.backgroundColor = "rgb(125 172 210)";
       showAlert("Dark mode has been enabled", "success");
+      document.title = "Text Utility App - Dark Mode";
+      // setInterval(() => {
+      //   document.title = "Text Utility App is Amazing!";
+      // }, 2000);
+      // setInterval(() => {
+      //   document.title = "Install Text Utility App Now!";
+      // }, 1500);
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
       showAlert("Light mode has been enabled", "success");
+      document.title = "Text Utility App - Light Mode";
     }
   };
 

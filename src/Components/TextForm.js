@@ -203,12 +203,27 @@ export default function TextForm(props) {
             Find and Replace
           </button>
         </div>
-
+        <hr />
         <div className="text-center">
           <p>
             <strong>Word Count:</strong> {wordCount} |{" "}
             <strong>Character Count:</strong> {charCount}
           </p>
+        </div>
+        <p className="text-center">
+          <strong>Note:</strong> The word count excludes extra spaces and empty
+          lines.
+          <br />
+          The character count includes all characters, including spaces.
+        </p>
+        <p className="text-center">
+          {" "}
+          <strong>{0.008 * text.split(" ").length}</strong> minutes to read data 
+        </p>
+        <hr />
+        <div className="text-center">
+          <h2>Preview</h2>
+          <p>{text.length > 0 ? text : "Nothing to preview !"}</p>
         </div>
       </div>
     </>

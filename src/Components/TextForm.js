@@ -152,30 +152,31 @@ export default function TextForm(props) {
           ></textarea>
         </div>
         <div className="mb-3 w-50 mx-auto d-flex flex-wrap justify-content-center gap-2">
-          <button className="btn btn-primary" onClick={handleUpperCase}>
+          <button className="btn btn-primary" onClick={handleUpperCase} disabled={text.length === 0}>
             Convert to Uppercase
           </button>
-          <button className="btn btn-secondary" onClick={handleLowerCase}>
+          <button className="btn btn-secondary" onClick={handleLowerCase} disabled={text.length === 0}>
             Convert to Lowercase
           </button>
-          <button className="btn btn-success" onClick={handleClearText}>
+          <button className="btn btn-success" onClick={handleClearText} disabled={!text}>
             Clear Text
           </button>
-          <button className="btn btn-danger" onClick={handleCopyText}>
+          <button className="btn btn-danger" onClick={handleCopyText} disabled={!text}>
             Copy Text
           </button>
-          <button className="btn btn-warning" onClick={handleRemoveExtraSpaces}>
+          <button className="btn btn-warning" onClick={handleRemoveExtraSpaces} disabled={!text}>
             Remove Extra Spaces
           </button>
-          <button className="btn btn-info" onClick={handleCapitalizeWords}>
+          <button className="btn btn-info" onClick={handleCapitalizeWords} disabled={!text}>
             Capitalize Words
           </button>
-          <button className="btn btn-dark" onClick={handleReverseText}>
+          <button className="btn btn-dark" onClick={handleReverseText} disabled={!text}>
             Reverse Text
           </button>
           <button
             className="btn btn-outline-primary"
             onClick={convertTextToNumber}
+            disabled={!text}
           >
             Convert Text to Number
           </button>
@@ -199,6 +200,7 @@ export default function TextForm(props) {
           <button
             className="btn btn-outline-success mb-3"
             onClick={handleFindAndReplace}
+            disabled={!findWord || !replaceWord || !text}
           >
             Find and Replace
           </button>

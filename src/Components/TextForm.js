@@ -132,7 +132,7 @@ export default function TextForm(props) {
   return (
     <>
       <div className="container text-center mb-4">
-        <h1 style={{ marginTop: "30px" }}>{props.heading}</h1>
+        <h1 style={{ marginTop: "25px" }}>{props.heading}</h1>
       </div>
       <div className="container text-center mb-4">
         <p className="lead mb-4">

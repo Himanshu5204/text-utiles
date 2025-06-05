@@ -1,10 +1,12 @@
 //import logo from './logo.svg';
 import "./App.css";
-// import About_us from "./Components/About_us";
+import AboutUs from "./Components/AboutUs";
 import Navbar from "./Components/Navbar";
 import Alert from "./Components/Alert";
 import TextForm from "./Components/TextForm";
 import React, { useState } from "react";
+//import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light"); // Whether dark mode is enabled or not
@@ -42,10 +44,28 @@ function App() {
 
   return (
     <>
-      <Navbar title="Text Utility App" mode={mode} toggleMode={toggleMode} />
-      <Alert alert={alert} />
-      <TextForm heading="Welcome to Text Utility App" mode={mode} showAlert={showAlert} />
+      <Router>
+        <Navbar title="Text Utility App" mode={mode} aboutText="About-us" toggleMode={toggleMode} />
+        <Alert alert={alert} />
+        <Routes>
+          <Route exact path="/about" element={<AboutUs text="About TextUtils" />} />
+          <Route
+            path="/"
+            element={
+              <TextForm
+                showAlert={showAlert}
+                heading="Enter the text to analyze below"
+                mode={mode}
+              />
+            }
+          />
+        </Routes>
 
+        {/* <Route path="/" exact> */}
+        {/* The exact prop is used to match the exact path */}
+      </Router>
+      <div className="container my-3"></div>
+      {/* Uncomment the line below to include the About Us component */}
       {/* <About_us /> */}
     </>
   );
